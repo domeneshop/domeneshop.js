@@ -1,0 +1,27 @@
+{
+  "name": "domeneshop.js",
+  "version": "0.1.0",
+  "description": "Javascript package for the Domeneshop API",
+  "main": "dist/domeneshop.js",
+  "types": "dist/domeneshop.d.ts",
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "bugs": {
+    "url": "https://github.com/domeneshop/domeneshop.js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/domeneshop/domeneshop.js.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^11.13.4",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000"
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
