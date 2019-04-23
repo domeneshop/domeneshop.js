@@ -1,5 +1,6 @@
 import Api from "./lib/api"
 import Dns from "./lib/dns"
+import { DomainName } from "./lib/interfaces/domainname"
 
 /**
  * Main class of the Domeneshop Javascript API.
@@ -26,7 +27,7 @@ class Domeneshop {
     /**
      * getDomains
      */
-    public async getDomains(): Promise<[any]> {
+    public async getDomains(): Promise<[DomainName]> {
         var res = await this.api.apiCall("GET", "/domains");
         return res.data;
     }
@@ -36,7 +37,7 @@ class Domeneshop {
      * 
      * @param id The ID number of domain.
      */
-    public async getDomain(id: number): Promise<any> {
+    public async getDomain(id: number): Promise<DomainName> {
         var res = await this.api.apiCall("GET", `/domains/${id}`);
         return res.data;
     }
