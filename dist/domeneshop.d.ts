@@ -1,4 +1,5 @@
 import Dns from "./lib/dns";
+import { DomainName } from "./lib/interfaces/domainname";
 /**
  * Main class of the Domeneshop Javascript API.
  */
@@ -16,12 +17,12 @@ declare class Domeneshop {
     /**
      * getDomains
      */
-    getDomains(): Promise<[any]>;
+    getDomains(): Promise<[DomainName]>;
     /**
      * getDomain
      *
      * @param id The ID number of domain.
      */
-    getDomain(id: number): Promise<any>;
+    getDomain(id: number): Promise<DomainName>;
 }
 export = Domeneshop;
