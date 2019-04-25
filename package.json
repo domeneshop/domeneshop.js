@@ -1,6 +1,6 @@
 {
   "name": "domeneshop.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Javascript package for the Domeneshop API",
   "main": "dist/domeneshop.js",
   "types": "dist/domeneshop.d.ts",
