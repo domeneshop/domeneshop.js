@@ -5,35 +5,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param params Json object which describes a DNS-record.
  */
 function validate(params) {
-    const common = ['host', 'data', 'type'];
+    const common = ["host", "data", "type"];
     const types = {
-        'A': [],
-        'AAAA': [],
-        'CNAME': [],
-        'ANAME': [],
-        'MX': ['priority'],
-        'SRV': ['priority', 'weight', 'port'],
-        'TLSA': ['usage', 'selector', 'dtype'],
-        'DS': ['tag', 'alg', 'digest'],
-        'CAA': ['flags', 'tag']
+        A: [],
+        AAAA: [],
+        ANAME: [],
+        CAA: ["flags", "tag"],
+        CNAME: [],
+        DS: ["tag", "alg", "digest"],
+        MX: ["priority"],
+        SRV: ["priority", "weight", "port"],
+        TLSA: ["usage", "selector", "dtype"],
     };
-    if (!params.hasOwnProperty("type"))
+    if (!params.hasOwnProperty("type")) {
         throw new Error("Record does not have any type");
-    if (!types.hasOwnProperty(params.type))
-        throw new Error("Record has an unknown type");
-    let fields = common;
-    let special = types[params.type];
-    fields.concat(special);
-    if (params.hasOwnProperty('id'))
-        fields.push('id');
-    if (params.hasOwnProperty('ttl'))
-        fields.push('ttl');
-    for (let idx = 0; idx < fields.length; idx++) {
-        if (!params.hasOwnProperty(fields[idx]))
-            throw new Error("Record missing required field");
     }
-    if (fields.length < Object.keys(params).keys.length)
+    if (!types.hasOwnProperty(params.type)) {
+        throw new Error("Record has an unknown type");
+    }
+    const special = types[params.type];
+    const fields = common.concat(special);
+    if (params.hasOwnProperty("id")) {
+        fields.push("id");
+    }
+    if (params.hasOwnProperty("ttl")) {
+        fields.push("ttl");
+    }
+    for (const field of fields) {
+        if (!params.hasOwnProperty(field)) {
+            throw new Error("Record missing required field");
+        }
+    }
+    if (fields.length < Object.keys(params).keys.length) {
         throw new Error("Too many fields in object");
+    }
     return true;
 }
 exports.validate = validate;

@@ -26,7 +26,7 @@ class Domeneshop {
      */
     getDomains() {
         return __awaiter(this, void 0, void 0, function* () {
-            var res = yield this.api.apiCall("GET", "/domains");
+            const res = yield this.api.apiCall("GET", "/domains");
             return res.data;
         });
     }
@@ -37,7 +37,7 @@ class Domeneshop {
      */
     getDomain(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            var res = yield this.api.apiCall("GET", `/domains/${id}`);
+            const res = yield this.api.apiCall("GET", `/domains/${id}`);
             return res.data;
         });
     }

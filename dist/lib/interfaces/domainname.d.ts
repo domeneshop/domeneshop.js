@@ -1,7 +1,7 @@
 /**
  * An domain name element
  */
-export interface DomainName {
+export interface IDomainName {
     domain: string;
     id: number;
     expiry_date: string;
@@ -10,9 +10,9 @@ export interface DomainName {
     nameservers: [string];
     renew: boolean;
     status: string;
-    services: DomainNameService;
+    services: IDomainNameService;
 }
-export interface DomainNameService {
+export interface IDomainNameService {
     dns: boolean;
     email: boolean;
     registrar: boolean;

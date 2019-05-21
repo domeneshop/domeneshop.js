@@ -1,7 +1,7 @@
 /**
  * What all records have in common.
  */
-interface DnsRecordBase {
+interface IDnsRecordBase {
     host: string;
     data: string;
     type: string;
@@ -12,35 +12,35 @@ interface DnsRecordBase {
 /**
  * Interface for an A-record
  */
-export interface DnsRecordA extends DnsRecordBase {
+export interface IDnsRecordA extends IDnsRecordBase {
     type: "A";
 }
 
 /**
  * Interface for an AAAA-record
  */
-export interface DnsRecordAAAA extends DnsRecordBase {
+export interface IDnsRecordAAAA extends IDnsRecordBase {
     type: "AAAA";
 }
 
 /**
  * Interface for a CNAME-record
  */
-export interface DnsRecordCname extends DnsRecordBase {
+export interface IDnsRecordCname extends IDnsRecordBase {
     type: "CNAME";
 }
 
 /**
  * Interface for an ANAME-record
  */
-export interface DnsRecordAname extends DnsRecordBase {
+export interface IDnsRecordAname extends IDnsRecordBase {
     type: "ANAME";
 }
 
 /**
  * Interface for a MX-record
  */
-export interface DnsRecordMX extends DnsRecordBase {
+export interface IDnsRecordMX extends IDnsRecordBase {
     type: "MX";
     priority: number;
 }
@@ -48,7 +48,7 @@ export interface DnsRecordMX extends DnsRecordBase {
 /**
  * Interface for a SRV-record
  */
-export interface DnsRecordSRV extends DnsRecordBase {
+export interface IDnsRecordSRV extends IDnsRecordBase {
     type: "SRV";
     priority: number;
     weight: number;
@@ -58,7 +58,7 @@ export interface DnsRecordSRV extends DnsRecordBase {
 /**
  * Interface for a TLSA-record
  */
-export interface DnsRecordTLSA extends DnsRecordBase {
+export interface IDnsRecordTLSA extends IDnsRecordBase {
     type: "TLSA";
     usage: number;
     selector: number;
@@ -68,7 +68,7 @@ export interface DnsRecordTLSA extends DnsRecordBase {
 /**
  * Interface for a DS-record
  */
-export interface DnsRecordDS extends DnsRecordBase {
+export interface IDnsRecordDS extends IDnsRecordBase {
     type: "DS";
     tag: number;
     alg: number;
@@ -78,7 +78,7 @@ export interface DnsRecordDS extends DnsRecordBase {
 /**
  * Interface for a CAA-record
  */
-export interface DnsRecordCAA extends DnsRecordBase {
+export interface IDnsRecordCAA extends IDnsRecordBase {
     type: "CAA";
     flags: number;
     tag: number;
@@ -87,47 +87,60 @@ export interface DnsRecordCAA extends DnsRecordBase {
 /**
  * Type which gathers all interfaces.
  */
-export type DnsRecord = DnsRecordA | DnsRecordAAAA | DnsRecordCname | DnsRecordAname | DnsRecordMX | DnsRecordSRV | DnsRecordTLSA | DnsRecordDS | DnsRecordCAA;
+export type DnsRecord = IDnsRecordA |
+    IDnsRecordAAAA |
+    IDnsRecordCname |
+    IDnsRecordAname |
+    IDnsRecordMX |
+    IDnsRecordSRV |
+    IDnsRecordTLSA |
+    IDnsRecordDS |
+    IDnsRecordCAA;
 
 /**
  * Performs a simple validation a DNS-record.
  * @param params Json object which describes a DNS-record.
  */
 export function validate(params: DnsRecord) {
-    const common: string[] = ['host', 'data', 'type'];
+    const common: string[] = ["host", "data", "type"];
     const types: { [index: string]: string[] } = {
-        'A': [],
-        'AAAA': [],
-        'CNAME': [],
-        'ANAME': [],
-        'MX': ['priority'],
-        'SRV': ['priority', 'weight', 'port'],
-        'TLSA': ['usage', 'selector', 'dtype'],
-        'DS': ['tag', 'alg', 'digest'],
-        'CAA': ['flags', 'tag']
+        A: [],
+        AAAA: [],
+        ANAME: [],
+        CAA: ["flags", "tag"],
+        CNAME: [],
+        DS: ["tag", "alg", "digest"],
+        MX: ["priority"],
+        SRV: ["priority", "weight", "port"],
+        TLSA: ["usage", "selector", "dtype"],
     };
 
-    if (!params.hasOwnProperty("type"))
+    if (!params.hasOwnProperty("type")) {
         throw new Error("Record does not have any type");
-    if (!types.hasOwnProperty(params.type))
+    }
+    if (!types.hasOwnProperty(params.type)) {
         throw new Error("Record has an unknown type");
-
-    let fields = common;
-    let special: string[] = types[params.type];
-    fields.concat(special);
-
-    if (params.hasOwnProperty('id'))
-        fields.push('id');
-    if (params.hasOwnProperty('ttl'))
-        fields.push('ttl');
-
-    for (let idx = 0; idx < fields.length; idx++) {
-        if (!params.hasOwnProperty(fields[idx]))
-            throw new Error("Record missing required field");
     }
 
-    if (fields.length < Object.keys(params).keys.length)
+    const special: string[] = types[params.type];
+    const fields = common.concat(special);
+
+    if (params.hasOwnProperty("id")) {
+        fields.push("id");
+    }
+    if (params.hasOwnProperty("ttl")) {
+        fields.push("ttl");
+    }
+
+    for (const field of fields) {
+        if (!params.hasOwnProperty(field)) {
+            throw new Error("Record missing required field");
+        }
+    }
+
+    if (fields.length < Object.keys(params).keys.length) {
         throw new Error("Too many fields in object");
+    }
 
     return true;
 }

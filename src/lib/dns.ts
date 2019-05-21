@@ -1,12 +1,12 @@
-import Api from "./api"
-import { DnsRecord, validate } from "./interfaces/dnsrecord"
+import Api from "./api";
+import { DnsRecord, validate } from "./interfaces/dnsrecord";
 
 class Dns {
     private api: Api;
 
     /**
      * Create new DNS object
-     * 
+     *
      * @param api Instance of Api-class
      */
     constructor(api: Api) {
@@ -18,7 +18,7 @@ class Dns {
      * @param domainId Domain ID for the domain in question
      */
     public async getRecords(domainId: number): Promise<[DnsRecord]> {
-        var res = await this.api.apiCall("GET", `/domains/${domainId}/dns`);
+        const res = await this.api.apiCall("GET", `/domains/${domainId}/dns`);
         return res.data;
     }
 
@@ -28,7 +28,7 @@ class Dns {
      * @param recordId Record ID for the record in question
      */
     public async getRecord(domainId: number, recordId: number): Promise<DnsRecord> {
-        var res = await this.api.apiCall("GET", `/domains/${domainId}/dns/${recordId}`);
+        const res = await this.api.apiCall("GET", `/domains/${domainId}/dns/${recordId}`);
         return res.data;
     }
 
@@ -39,12 +39,13 @@ class Dns {
      */
     public async createRecord(domainId: number, record: DnsRecord): Promise<number> {
         validate(record);
-        var res = await this.api.apiCall("POST", `/domains/${domainId}/dns`, record);
-        let location = res.headers.location;
-        if (location)
-            return parseInt(location.split('/').slice(-1)[0]);
-        else
+        const res = await this.api.apiCall("POST", `/domains/${domainId}/dns`, record);
+        const location = res.headers.location;
+        if (location) {
+            return parseInt(location.split("/").slice(-1)[0], 10);
+        } else {
             throw new Error("This is not happening!!!!");
+        }
     }
 
     /**
