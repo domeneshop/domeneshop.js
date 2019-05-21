@@ -1,0 +1,40 @@
+image: node:10.15.3
+
+stages:
+  - lint
+  - build
+  - test
+
+cache:
+  paths:
+    - node_modules/
+
+linter:
+  stage: lint
+  tags:
+    - node
+  before_script: 
+    - npm install
+  script:
+    - npm run lint
+
+build:
+  stage: build
+  tags:
+    - node
+  before_script: 
+    - npm install
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist
+
+test:
+  stage: test
+  tags:
+    - node
+  before_script: 
+    - npm install
+  script:
+    - npm run test

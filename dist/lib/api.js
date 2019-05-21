@@ -27,19 +27,19 @@ class Api {
      * @param params Params for the request
      */
     apiCall(method = "GET", endpoint = "/", data, params) {
-        let reqOptions = {
-            baseURL: this.apiURL,
-            method: method,
-            url: endpoint,
+        const reqOptions = {
             auth: {
+                password: this.secret,
                 username: this.token,
-                password: this.secret
             },
+            baseURL: this.apiURL,
             headers: {
-                "Content-Type": "application/json",
                 "Accept": "application/json",
+                "Content-Type": "application/json",
             },
-            responseType: 'json'
+            method,
+            responseType: "json",
+            url: endpoint,
         };
         if (params) {
             reqOptions.params = params;

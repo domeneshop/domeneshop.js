@@ -23,7 +23,7 @@ class Dns {
      */
     getRecords(domainId) {
         return __awaiter(this, void 0, void 0, function* () {
-            var res = yield this.api.apiCall("GET", `/domains/${domainId}/dns`);
+            const res = yield this.api.apiCall("GET", `/domains/${domainId}/dns`);
             return res.data;
         });
     }
@@ -34,7 +34,7 @@ class Dns {
      */
     getRecord(domainId, recordId) {
         return __awaiter(this, void 0, void 0, function* () {
-            var res = yield this.api.apiCall("GET", `/domains/${domainId}/dns/${recordId}`);
+            const res = yield this.api.apiCall("GET", `/domains/${domainId}/dns/${recordId}`);
             return res.data;
         });
     }
@@ -46,12 +46,14 @@ class Dns {
     createRecord(domainId, record) {
         return __awaiter(this, void 0, void 0, function* () {
             dnsrecord_1.validate(record);
-            var res = yield this.api.apiCall("POST", `/domains/${domainId}/dns`, record);
-            let location = res.headers.location;
-            if (location)
-                return parseInt(location.split('/').slice(-1)[0]);
-            else
+            const res = yield this.api.apiCall("POST", `/domains/${domainId}/dns`, record);
+            const location = res.headers.location;
+            if (location) {
+                return parseInt(location.split("/").slice(-1)[0], 10);
+            }
+            else {
                 throw new Error("This is not happening!!!!");
+            }
         });
     }
     /**

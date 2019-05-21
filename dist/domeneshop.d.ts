@@ -1,28 +1,28 @@
 import Dns from "./lib/dns";
-import { DomainName } from "./lib/interfaces/domainname";
+import { IDomainName } from "./lib/interfaces/domainname";
 /**
  * Main class of the Domeneshop Javascript API.
  */
 declare class Domeneshop {
-    readonly version: String;
-    /**
-     * Private variables internal to Domeneshop object
-     */
-    private api;
+    readonly version: string;
     /**
      * Public API modules
      */
     dns: Dns;
+    /**
+     * Private variables internal to Domeneshop object
+     */
+    private api;
     constructor(token: string, secret: string);
     /**
      * getDomains
      */
-    getDomains(): Promise<[DomainName]>;
+    getDomains(): Promise<[IDomainName]>;
     /**
      * getDomain
      *
      * @param id The ID number of domain.
      */
-    getDomain(id: number): Promise<DomainName>;
+    getDomain(id: number): Promise<IDomainName>;
 }
 export = Domeneshop;

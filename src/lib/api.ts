@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from "axios";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
 
 /**
  * Class for Domeneshop API calls.
@@ -11,7 +11,7 @@ class Api {
 
     /**
      * Set up token and secret for API access.
-     * 
+     *
      * @param token API token
      * @param secret API secret
      */
@@ -22,26 +22,30 @@ class Api {
 
     /**
      * Do an API call.
-     * 
+     *
      * @param method Method for the request
      * @param endpoint Request endpoint
      * @param data Content of the request
      * @param params Params for the request
      */
-    public apiCall(method: string = "GET", endpoint: string = "/", data?: any, params?: { [key: string]: any }): Promise<AxiosResponse> {
-        let reqOptions: AxiosRequestConfig = {
-            baseURL: this.apiURL,
-            method: method,
-            url: endpoint,
+    public apiCall(
+        method: string = "GET",
+        endpoint: string = "/",
+        data?: any,
+        params?: { [key: string]: any }): Promise<AxiosResponse> {
+        const reqOptions: AxiosRequestConfig = {
             auth: {
+                password: this.secret,
                 username: this.token,
-                password: this.secret
             },
+            baseURL: this.apiURL,
             headers: {
-                "Content-Type": "application/json",
                 "Accept": "application/json",
+                "Content-Type": "application/json",
             },
-            responseType: 'json'
+            method,
+            responseType: "json",
+            url: endpoint,
         };
         if (params) {
             reqOptions.params = params;

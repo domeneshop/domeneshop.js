@@ -1,7 +1,7 @@
 /**
  * What all records have in common.
  */
-interface DnsRecordBase {
+interface IDnsRecordBase {
     host: string;
     data: string;
     type: string;
@@ -11,38 +11,38 @@ interface DnsRecordBase {
 /**
  * Interface for an A-record
  */
-export interface DnsRecordA extends DnsRecordBase {
+export interface IDnsRecordA extends IDnsRecordBase {
     type: "A";
 }
 /**
  * Interface for an AAAA-record
  */
-export interface DnsRecordAAAA extends DnsRecordBase {
+export interface IDnsRecordAAAA extends IDnsRecordBase {
     type: "AAAA";
 }
 /**
  * Interface for a CNAME-record
  */
-export interface DnsRecordCname extends DnsRecordBase {
+export interface IDnsRecordCname extends IDnsRecordBase {
     type: "CNAME";
 }
 /**
  * Interface for an ANAME-record
  */
-export interface DnsRecordAname extends DnsRecordBase {
+export interface IDnsRecordAname extends IDnsRecordBase {
     type: "ANAME";
 }
 /**
  * Interface for a MX-record
  */
-export interface DnsRecordMX extends DnsRecordBase {
+export interface IDnsRecordMX extends IDnsRecordBase {
     type: "MX";
     priority: number;
 }
 /**
  * Interface for a SRV-record
  */
-export interface DnsRecordSRV extends DnsRecordBase {
+export interface IDnsRecordSRV extends IDnsRecordBase {
     type: "SRV";
     priority: number;
     weight: number;
@@ -51,7 +51,7 @@ export interface DnsRecordSRV extends DnsRecordBase {
 /**
  * Interface for a TLSA-record
  */
-export interface DnsRecordTLSA extends DnsRecordBase {
+export interface IDnsRecordTLSA extends IDnsRecordBase {
     type: "TLSA";
     usage: number;
     selector: number;
@@ -60,7 +60,7 @@ export interface DnsRecordTLSA extends DnsRecordBase {
 /**
  * Interface for a DS-record
  */
-export interface DnsRecordDS extends DnsRecordBase {
+export interface IDnsRecordDS extends IDnsRecordBase {
     type: "DS";
     tag: number;
     alg: number;
@@ -69,7 +69,7 @@ export interface DnsRecordDS extends DnsRecordBase {
 /**
  * Interface for a CAA-record
  */
-export interface DnsRecordCAA extends DnsRecordBase {
+export interface IDnsRecordCAA extends IDnsRecordBase {
     type: "CAA";
     flags: number;
     tag: number;
@@ -77,7 +77,7 @@ export interface DnsRecordCAA extends DnsRecordBase {
 /**
  * Type which gathers all interfaces.
  */
-export declare type DnsRecord = DnsRecordA | DnsRecordAAAA | DnsRecordCname | DnsRecordAname | DnsRecordMX | DnsRecordSRV | DnsRecordTLSA | DnsRecordDS | DnsRecordCAA;
+export declare type DnsRecord = IDnsRecordA | IDnsRecordAAAA | IDnsRecordCname | IDnsRecordAname | IDnsRecordMX | IDnsRecordSRV | IDnsRecordTLSA | IDnsRecordDS | IDnsRecordCAA;
 /**
  * Performs a simple validation a DNS-record.
  * @param params Json object which describes a DNS-record.
