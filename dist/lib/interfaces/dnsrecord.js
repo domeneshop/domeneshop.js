@@ -16,14 +16,15 @@ function validate(params) {
         MX: ["priority"],
         SRV: ["priority", "weight", "port"],
         TLSA: ["usage", "selector", "dtype"],
+        TXT: [],
     };
     if (!params.hasOwnProperty("type")) {
         throw new Error("Record does not have any type");
     }
-    if (!types.hasOwnProperty(params.type)) {
+    if (!types.hasOwnProperty(params.type.toUpperCase())) {
         throw new Error("Record has an unknown type");
     }
-    const special = types[params.type];
+    const special = types[params.type.toUpperCase()];
     const fields = common.concat(special);
     if (params.hasOwnProperty("id")) {
         fields.push("id");

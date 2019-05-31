@@ -86,6 +86,15 @@ describe("dnsrecord.validate", function () {
             });
             expect(validA).to.true;
         });
+        it("should return true on valid TXT-record", function () {
+            var validA = dnsrecord.validate({
+                type: "TXT",
+                ttl: 3600,
+                data: 'test',
+                host: 'localhost',
+            });
+            expect(validA).to.true;
+        });
     });
 
 

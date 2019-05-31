@@ -7,7 +7,6 @@
  */
 
 const Domeneshop = require('domeneshop.js');
-const axios = require('axios');
 
 /**
  * Your information. 

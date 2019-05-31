@@ -17,7 +17,7 @@ const dns_1 = __importDefault(require("./lib/dns"));
  */
 class Domeneshop {
     constructor(token, secret) {
-        this.version = "0.1.0";
+        this.version = "0.1.3";
         this.api = new api_1.default(token, secret);
         this.dns = new dns_1.default(this.api);
     }

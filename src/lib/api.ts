@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 
 /**
  * Class for Domeneshop API calls.
@@ -29,7 +29,7 @@ class Api {
      * @param params Params for the request
      */
     public apiCall(
-        method: string = "GET",
+        method: Method = "GET",
         endpoint: string = "/",
         data?: any,
         params?: { [key: string]: any }): Promise<AxiosResponse> {

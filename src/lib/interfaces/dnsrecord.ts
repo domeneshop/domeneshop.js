@@ -17,6 +17,13 @@ export interface IDnsRecordA extends IDnsRecordBase {
 }
 
 /**
+ * Interface for an A-record
+ */
+export interface IDnsRecordTXT extends IDnsRecordBase {
+    type: "TXT";
+}
+
+/**
  * Interface for an AAAA-record
  */
 export interface IDnsRecordAAAA extends IDnsRecordBase {
@@ -94,6 +101,7 @@ export type DnsRecord = IDnsRecordA |
     IDnsRecordMX |
     IDnsRecordSRV |
     IDnsRecordTLSA |
+    IDnsRecordTXT |
     IDnsRecordDS |
     IDnsRecordCAA;
 
@@ -113,16 +121,18 @@ export function validate(params: DnsRecord) {
         MX: ["priority"],
         SRV: ["priority", "weight", "port"],
         TLSA: ["usage", "selector", "dtype"],
+        TXT: [],
     };
 
     if (!params.hasOwnProperty("type")) {
         throw new Error("Record does not have any type");
     }
-    if (!types.hasOwnProperty(params.type)) {
+
+    if (!types.hasOwnProperty(params.type.toUpperCase())) {
         throw new Error("Record has an unknown type");
     }
 
-    const special: string[] = types[params.type];
+    const special: string[] = types[params.type.toUpperCase()];
     const fields = common.concat(special);
 
     if (params.hasOwnProperty("id")) {
