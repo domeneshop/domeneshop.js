@@ -15,6 +15,12 @@ export interface IDnsRecordA extends IDnsRecordBase {
     type: "A";
 }
 /**
+ * Interface for an A-record
+ */
+export interface IDnsRecordTXT extends IDnsRecordBase {
+    type: "TXT";
+}
+/**
  * Interface for an AAAA-record
  */
 export interface IDnsRecordAAAA extends IDnsRecordBase {
@@ -77,7 +83,7 @@ export interface IDnsRecordCAA extends IDnsRecordBase {
 /**
  * Type which gathers all interfaces.
  */
-export declare type DnsRecord = IDnsRecordA | IDnsRecordAAAA | IDnsRecordCname | IDnsRecordAname | IDnsRecordMX | IDnsRecordSRV | IDnsRecordTLSA | IDnsRecordDS | IDnsRecordCAA;
+export declare type DnsRecord = IDnsRecordA | IDnsRecordAAAA | IDnsRecordCname | IDnsRecordAname | IDnsRecordMX | IDnsRecordSRV | IDnsRecordTLSA | IDnsRecordTXT | IDnsRecordDS | IDnsRecordCAA;
 /**
  * Performs a simple validation a DNS-record.
  * @param params Json object which describes a DNS-record.
