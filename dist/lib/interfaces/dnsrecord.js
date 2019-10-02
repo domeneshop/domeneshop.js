@@ -38,7 +38,7 @@ function validate(params) {
             throw new Error("Record missing required field");
         }
     }
-    if (fields.length < Object.keys(params).keys.length) {
+    if (fields.length < Object.keys(params).length) {
         throw new Error("Too many fields in object");
     }
     return true;

@@ -157,7 +157,7 @@ export function validate(params: DnsRecord) {
         }
     }
 
-    if (fields.length < Object.keys(params).keys.length) {
+    if (fields.length < Object.keys(params).length) {
         throw new Error("Too many fields in object");
     }
 

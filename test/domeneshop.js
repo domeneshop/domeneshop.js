@@ -1,17 +1,15 @@
-const {
-    expect,
-    assert
-} = require("chai");
+/*jshint esversion: 6 */
+
+const expect = require("chai").expect;
+const domeneshop = require("../dist/domeneshop");
 
 describe("Domeneshop", function () {
     describe("Import", function () {
         it("returns a function", function () {
-            var domeneshop = require("../dist/domeneshop");
             expect(domeneshop).to.be.a('function');
         });
     });
     describe("Class", function () {
-        var domeneshop = require("../dist/domeneshop");
         var instance = new domeneshop();
 
         for (const obj of ['api', 'dns', 'forwards', 'invoices']) {

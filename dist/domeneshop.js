@@ -20,7 +20,7 @@ const invoices_1 = __importDefault(require("./lib/invoices"));
  */
 class Domeneshop {
     constructor(token, secret) {
-        this.version = "0.1.5";
+        this.version = "0.1.6";
         this.api = new api_1.default(token, secret);
         this.dns = new dns_1.default(this.api);
         this.forwards = new forwards_1.default(this.api);

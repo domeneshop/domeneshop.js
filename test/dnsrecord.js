@@ -1,5 +1,8 @@
-var expect = require("chai").expect;
-var dnsrecord = require("../dist/lib/interfaces/dnsrecord");
+/*jshint esversion: 6 */
+
+const expect = require("chai").expect;
+const dnsrecord = require("../dist/lib/interfaces/dnsrecord");
+
 describe("dnsrecord.validate", function () {
     describe("Valid records", function () {
         it("should return true on valid A-record", function () {
@@ -230,6 +233,21 @@ describe("dnsrecord.validate", function () {
                     host: '_443._tcp.www',
                 });
             }).to.throw("Record missing required field");
+        });
+
+        it("should throw error on too many fields in object", function () {
+            expect(function () {
+                dnsrecord.validate({
+                    type: "TLSA",
+                    ttl: 3600,
+                    usage: 0,
+                    dtype: 1,
+                    selector: 1,
+                    data: 'ABCDEF0123456789',
+                    host: '_443._tcp.www',
+                    bogus: 'should not exist'
+                });
+            }).to.throw("Too many fields in object");
         });
     });
 });
