@@ -8,10 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const dnsrecord_1 = require("./interfaces/dnsrecord");
-class Dns {
+class Forwards {
     /**
-     * Create new DNS object
+     * Create new Forwards object
      *
      * @param api Instance of Api-class
      */
@@ -19,44 +18,43 @@ class Dns {
         this.api = api;
     }
     /**
-     * Get all DNS records for a domain.
+     * Get all forwardings at a domain.
      * @param domainId Domain ID for the domain in question
      *
-     * @returns Promise with all DNS records on a domain
+     * @returns Promise with forwarding data for every hostname.
      */
-    getRecords(domainId) {
+    getForwards(domainId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const res = yield this.api.apiCall("GET", `/domains/${domainId}/dns`);
+            const res = yield this.api.apiCall("GET", `/domains/${domainId}/forwards`);
             return res.data;
         });
     }
     /**
-     * Get single record
+     * Get single forwarding for a host
      * @param domainId Domain ID for the domain in question
-     * @param recordId Record ID for the record in question
+     * @param host Hostname for the forwarding in question
      *
-     * @returns Promise with one specific DNS record on a domain
+     * @returns Promise with forwarding data.
      */
-    getRecord(domainId, recordId) {
+    getForward(domainId, host) {
         return __awaiter(this, void 0, void 0, function* () {
-            const res = yield this.api.apiCall("GET", `/domains/${domainId}/dns/${recordId}`);
+            const res = yield this.api.apiCall("GET", `/domains/${domainId}/forwards/${host}`);
             return res.data;
         });
     }
     /**
-     * Create one record
+     * Create forwarding for a host
      * @param domainId Domain ID for the domain in question
-     * @param record The record to be created
+     * @param forward The forwarding to be created
      *
-     * @returns Promise with the ID of the created DNS record
+     * @returns Promise with hostname
      */
-    createRecord(domainId, record) {
+    createForward(domainId, forward) {
         return __awaiter(this, void 0, void 0, function* () {
-            dnsrecord_1.validate(record);
-            const res = yield this.api.apiCall("POST", `/domains/${domainId}/dns`, record);
+            const res = yield this.api.apiCall("POST", `/domains/${domainId}/forwards`, forward);
             const location = res.headers.location;
             if (location) {
-                return parseInt(location.split("/").slice(-1)[0], 10);
+                return location.split("/").slice(-1)[0];
             }
             else {
                 throw new Error("This is not happening!!!!");
@@ -64,27 +62,26 @@ class Dns {
         });
     }
     /**
-     * Modify one record
+     * Modify forwarding for a host
      * @param domainId Domain ID for the domain in question
-     * @param recordId Record ID for the record in question
-     * @param record The new content of the record
+     * @param host Hostname for the forwarding in question
+     * @param forward The new content of the forwarding
      */
-    modifyRecord(domainId, recordId, record) {
+    modifyForward(domainId, host, forward) {
         return __awaiter(this, void 0, void 0, function* () {
-            dnsrecord_1.validate(record);
-            yield this.api.apiCall("PUT", `/domains/${domainId}/dns/${recordId}`, record);
+            yield this.api.apiCall("PUT", `/domains/${domainId}/forwards/${host}`, forward);
         });
     }
     /**
-     * Delete one record
+     * Delete forwarding for a host
      * @param domainId Domain ID for the domain in question
-     * @param recordId Record ID for the record in question
+     * @param host Hostname for the forwarding in question
      */
-    deleteRecord(domainId, recordId) {
+    deleteForward(domainId, host) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.api.apiCall("DELETE", `/domains/${domainId}/dns/${recordId}`);
+            yield this.api.apiCall("DELETE", `/domains/${domainId}/forwards/${host}`);
         });
     }
 }
-module.exports = Dns;
-//# sourceMappingURL=dns.js.map
+module.exports = Forwards;
+//# sourceMappingURL=forwards.js.map

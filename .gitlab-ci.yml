@@ -38,3 +38,4 @@ test:
     - npm install
   script:
     - npm run test
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/

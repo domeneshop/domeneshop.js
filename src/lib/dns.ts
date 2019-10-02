@@ -16,6 +16,8 @@ class Dns {
     /**
      * Get all DNS records for a domain.
      * @param domainId Domain ID for the domain in question
+     *
+     * @returns Promise with all DNS records on a domain
      */
     public async getRecords(domainId: number): Promise<[DnsRecord]> {
         const res = await this.api.apiCall("GET", `/domains/${domainId}/dns`);
@@ -26,6 +28,8 @@ class Dns {
      * Get single record
      * @param domainId Domain ID for the domain in question
      * @param recordId Record ID for the record in question
+     *
+     * @returns Promise with one specific DNS record on a domain
      */
     public async getRecord(domainId: number, recordId: number): Promise<DnsRecord> {
         const res = await this.api.apiCall("GET", `/domains/${domainId}/dns/${recordId}`);
@@ -35,7 +39,9 @@ class Dns {
     /**
      * Create one record
      * @param domainId Domain ID for the domain in question
-     * @param record The record to be crated
+     * @param record The record to be created
+     *
+     * @returns Promise with the ID of the created DNS record
      */
     public async createRecord(domainId: number, record: DnsRecord): Promise<number> {
         validate(record);
@@ -60,7 +66,7 @@ class Dns {
     }
 
     /**
-     * Delete ove record
+     * Delete one record
      * @param domainId Domain ID for the domain in question
      * @param recordId Record ID for the record in question
      */

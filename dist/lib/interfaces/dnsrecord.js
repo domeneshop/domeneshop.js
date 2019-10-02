@@ -14,6 +14,7 @@ function validate(params) {
         CNAME: [],
         DS: ["tag", "alg", "digest"],
         MX: ["priority"],
+        NS: [],
         SRV: ["priority", "weight", "port"],
         TLSA: ["usage", "selector", "dtype"],
         TXT: [],

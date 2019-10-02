@@ -1,6 +1,9 @@
 # dependencies
 /node_modules
 
+# nyc
+.nyc_output
+
 # misc
 .DS_Store
 .env.local
