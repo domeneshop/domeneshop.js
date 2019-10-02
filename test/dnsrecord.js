@@ -62,6 +62,15 @@ describe("dnsrecord.validate", function () {
             });
             expect(validA).to.true;
         });
+        it("should return true on valid NS-record", function () {
+            var validNS = dnsrecord.validate({
+                type: "NS",
+                ttl: 3600,
+                data: 'localhost',
+                host: 'localhost',
+            });
+            expect(validNS).to.true;
+        });
         it("should return true on valid SRV-record", function () {
             var validA = dnsrecord.validate({
                 type: "SRV",
@@ -186,6 +195,15 @@ describe("dnsrecord.validate", function () {
                     ttl: 3600,
                     data: 'mx.example.com',
                     host: '@',
+                });
+            }).to.throw("Record missing required field");
+        });
+        it("should throw error on missing data on NS-record", function () {
+            expect(function () {
+                dnsrecord.validate({
+                    type: "NS",
+                    ttl: 3600,
+                    host: 'localhost',
                 });
             }).to.throw("Record missing required field");
         });

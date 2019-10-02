@@ -3,22 +3,22 @@ const {
     assert
 } = require("chai");
 
-describe("Domeneshop.dns", function () {
+describe("Domeneshop.forwards", function () {
     describe("Import", function () {
         it("returns a function", function () {
-            var dns = require("../dist/lib/dns");
-            expect(dns).to.be.a('function');
+            var forwards = require("../dist/lib/forwards");
+            expect(forwards).to.be.a('function');
         });
     });
     describe("Class", function () {
-        var dns = require("../dist/lib/dns");
-        var instance = new dns({});
+        var forwards = require("../dist/lib/forwards");
+        var instance = new forwards({});
 
         it("has an api object", function () {
             expect(instance.api).to.be.an('object');
         });
 
-        for (const fun of ['getRecords', 'getRecord', 'createRecord', 'modifyRecord']) {
+        for (const fun of ['getForwards', 'getForward', 'createForward', 'modifyForward', 'deleteForward']) {
             it("has a function called " + fun, function () {
                 expect(instance[fun]).to.be.a('function');
             });

@@ -11,18 +11,24 @@ declare class Dns {
     /**
      * Get all DNS records for a domain.
      * @param domainId Domain ID for the domain in question
+     *
+     * @returns Promise with all DNS records on a domain
      */
     getRecords(domainId: number): Promise<[DnsRecord]>;
     /**
      * Get single record
      * @param domainId Domain ID for the domain in question
      * @param recordId Record ID for the record in question
+     *
+     * @returns Promise with one specific DNS record on a domain
      */
     getRecord(domainId: number, recordId: number): Promise<DnsRecord>;
     /**
      * Create one record
      * @param domainId Domain ID for the domain in question
-     * @param record The record to be crated
+     * @param record The record to be created
+     *
+     * @returns Promise with the ID of the created DNS record
      */
     createRecord(domainId: number, record: DnsRecord): Promise<number>;
     /**
@@ -33,7 +39,7 @@ declare class Dns {
      */
     modifyRecord(domainId: number, recordId: number, record: DnsRecord): Promise<void>;
     /**
-     * Delete ove record
+     * Delete one record
      * @param domainId Domain ID for the domain in question
      * @param recordId Record ID for the record in question
      */

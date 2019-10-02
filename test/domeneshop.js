@@ -14,13 +14,11 @@ describe("Domeneshop", function () {
         var domeneshop = require("../dist/domeneshop");
         var instance = new domeneshop();
 
-        it("has a dns object", function () {
-            expect(instance.dns).to.be.a('object');
-        });
-
-        it("has a api object", function () {
-            expect(instance.api).to.be.a('object');
-        });
+        for (const obj of ['api', 'dns', 'forwards', 'invoices']) {
+            it("has an object called " + obj, function () {
+                expect(instance[obj]).to.be.an('object');
+            });
+        }
 
         for (const fun of ['getDomains', 'getDomain']) {
             it("has a function called " + fun, function () {

@@ -1,4 +1,6 @@
 import Dns from "./lib/dns";
+import Forwards from "./lib/forwards";
+import Invoices from "./lib/invoices";
 import { IDomainName } from "./lib/interfaces/domainname";
 /**
  * Main class of the Domeneshop Javascript API.
@@ -9,6 +11,8 @@ declare class Domeneshop {
      * Public API modules
      */
     dns: Dns;
+    forwards: Forwards;
+    invoices: Invoices;
     /**
      * Private variables internal to Domeneshop object
      */

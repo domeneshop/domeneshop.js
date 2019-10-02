@@ -53,6 +53,13 @@ export interface IDnsRecordMX extends IDnsRecordBase {
 }
 
 /**
+ * Interface for an A-record
+ */
+export interface IDnsRecordNS extends IDnsRecordBase {
+    type: "NS";
+}
+
+/**
  * Interface for a SRV-record
  */
 export interface IDnsRecordSRV extends IDnsRecordBase {
@@ -99,6 +106,7 @@ export type DnsRecord = IDnsRecordA |
     IDnsRecordCname |
     IDnsRecordAname |
     IDnsRecordMX |
+    IDnsRecordNS |
     IDnsRecordSRV |
     IDnsRecordTLSA |
     IDnsRecordTXT |
@@ -119,6 +127,7 @@ export function validate(params: DnsRecord) {
         CNAME: [],
         DS: ["tag", "alg", "digest"],
         MX: ["priority"],
+        NS: [],
         SRV: ["priority", "weight", "port"],
         TLSA: ["usage", "selector", "dtype"],
         TXT: [],
