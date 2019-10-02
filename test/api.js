@@ -1,18 +1,16 @@
-const {
-    expect,
-    assert
-} = require("chai");
+/*jshint esversion: 6 */
+
+const expect = require("chai").expect;
+const api = require("../dist/lib/api");
 
 describe("Domeneshop.api", function () {
     describe("Import", function () {
         it("returns a function", function () {
-            var dns = require("../dist/lib/api");
-            expect(dns).to.be.a('function');
+            expect(api).to.be.a('function');
         });
     });
     describe("Class", function () {
-        var api = require("../dist/lib/api");
-        var instance = new api('','');
+        var instance = new api('', '');
 
         it("has an apiURL string", function () {
             expect(instance.apiURL).to.be.a('string');

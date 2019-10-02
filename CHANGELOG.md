@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.6] - 2019-10-02
+### Added
+- More tests
+- Dependent packages
+
+### Changed
+- Updated documentation for new functions in 0.1.5
+- Fixed error in DNS record validation
+
 ## [0.1.5] - 2019-10-02
 ### Added
 - DNS-record type NS
