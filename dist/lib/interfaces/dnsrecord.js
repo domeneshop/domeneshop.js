@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.validate = void 0;
 /**
  * Performs a simple validation a DNS-record.
  * @param params Json object which describes a DNS-record.

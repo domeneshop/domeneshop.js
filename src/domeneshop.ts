@@ -9,7 +9,7 @@ import { IDomainName } from "./lib/interfaces/domainname";
  * Main class of the Domeneshop Javascript API.
  */
 class Domeneshop {
-    public readonly version: string = "0.1.6";
+    public readonly version: string = "0.1.7";
 
     /**
      * Public API modules
