@@ -3,9 +3,9 @@
 const expect = require("chai").expect;
 const dnsrecord = require("../dist/lib/interfaces/dnsrecord");
 
-describe("dnsrecord.validate", function () {
-    describe("Valid records", function () {
-        it("should return true on valid A-record", function () {
+describe("dnsrecord.validate", () => {
+    describe("Valid records", () => {
+        it("should return true on valid A-record", () => {
             var validA = dnsrecord.validate({
                 type: "A",
                 ttl: 3600,
@@ -14,7 +14,7 @@ describe("dnsrecord.validate", function () {
             });
             expect(validA).to.true;
         });
-        it("should return true on valid AAAA-record", function () {
+        it("should return true on valid AAAA-record", () => {
             var validA = dnsrecord.validate({
                 type: "AAAA",
                 ttl: 3600,
@@ -23,7 +23,7 @@ describe("dnsrecord.validate", function () {
             });
             expect(validA).to.true;
         });
-        it("should return true on valid ANAME-record", function () {
+        it("should return true on valid ANAME-record", () => {
             var validA = dnsrecord.validate({
                 type: "ANAME",
                 ttl: 3600,
@@ -32,7 +32,7 @@ describe("dnsrecord.validate", function () {
             });
             expect(validA).to.true;
         });
-        it("should return true on valid CAA-record", function () {
+        it("should return true on valid CAA-record", () => {
             var validA = dnsrecord.validate({
                 type: "CAA",
                 ttl: 3600,
@@ -43,7 +43,7 @@ describe("dnsrecord.validate", function () {
             });
             expect(validA).to.true;
         });
-        it("should return true on valid DS-record", function () {
+        it("should return true on valid DS-record", () => {
             var validA = dnsrecord.validate({
                 type: "DS",
                 ttl: 3600,
@@ -55,7 +55,7 @@ describe("dnsrecord.validate", function () {
             });
             expect(validA).to.true;
         });
-        it("should return true on valid MX-record", function () {
+        it("should return true on valid MX-record", () => {
             var validA = dnsrecord.validate({
                 type: "MX",
                 ttl: 3600,
@@ -65,7 +65,7 @@ describe("dnsrecord.validate", function () {
             });
             expect(validA).to.true;
         });
-        it("should return true on valid NS-record", function () {
+        it("should return true on valid NS-record", () => {
             var validNS = dnsrecord.validate({
                 type: "NS",
                 ttl: 3600,
@@ -74,7 +74,7 @@ describe("dnsrecord.validate", function () {
             });
             expect(validNS).to.true;
         });
-        it("should return true on valid SRV-record", function () {
+        it("should return true on valid SRV-record", () => {
             var validA = dnsrecord.validate({
                 type: "SRV",
                 ttl: 3600,
@@ -86,7 +86,7 @@ describe("dnsrecord.validate", function () {
             });
             expect(validA).to.true;
         });
-        it("should return true on valid TLSA-record", function () {
+        it("should return true on valid TLSA-record", () => {
             var validA = dnsrecord.validate({
                 type: "TLSA",
                 ttl: 3600,
@@ -98,7 +98,7 @@ describe("dnsrecord.validate", function () {
             });
             expect(validA).to.true;
         });
-        it("should return true on valid TXT-record", function () {
+        it("should return true on valid TXT-record", () => {
             var validA = dnsrecord.validate({
                 type: "TXT",
                 ttl: 3600,
@@ -107,12 +107,30 @@ describe("dnsrecord.validate", function () {
             });
             expect(validA).to.true;
         });
+        it("should return true on valid record with id present", () => {
+            var validA = dnsrecord.validate({
+                id: 1234,
+                type: "TXT",
+                ttl: 3600,
+                data: 'test',
+                host: 'localhost',
+            });
+            expect(validA).to.true;
+        });
+        it("should return true on valid record with ttl missing", () => {
+            var validA = dnsrecord.validate({
+                type: "TXT",
+                data: 'test',
+                host: 'localhost',
+            });
+            expect(validA).to.true;
+        });
     });
 
 
-    describe("Records with errors", function () {
-        it("should throw error on missing type", function () {
-            expect(function () {
+    describe("Records with errors", () => {
+        it("should throw error on missing type", () => {
+            expect(() => {
                 dnsrecord.validate({
                     ttl: 3600,
                     host: 'localhost',
@@ -121,8 +139,8 @@ describe("dnsrecord.validate", function () {
             }).to.throw("Record does not have any type");
         });
 
-        it("should throw error on missing host", function () {
-            expect(function () {
+        it("should throw error on missing host", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: 'A',
                     ttl: 3600,
@@ -131,8 +149,8 @@ describe("dnsrecord.validate", function () {
             }).to.throw("Record missing required field");
         });
 
-        it("should throw error on unknown type", function () {
-            expect(function () {
+        it("should throw error on unknown type", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: 'GARBAGE',
                     ttl: 3600,
@@ -141,8 +159,8 @@ describe("dnsrecord.validate", function () {
             }).to.throw("Record has an unknown type");
         });
 
-        it("should throw error on missing data on A-record", function () {
-            expect(function () {
+        it("should throw error on missing data on A-record", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: "A",
                     ttl: 3600,
@@ -150,8 +168,8 @@ describe("dnsrecord.validate", function () {
                 });
             }).to.throw("Record missing required field");
         });
-        it("should throw error on missing host on AAAA-record", function () {
-            expect(function () {
+        it("should throw error on missing host on AAAA-record", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: "AAAA",
                     ttl: 3600,
@@ -159,8 +177,8 @@ describe("dnsrecord.validate", function () {
                 });
             }).to.throw("Record missing required field");
         });
-        it("should throw error on missing host on ANAME-record", function () {
-            expect(function () {
+        it("should throw error on missing host on ANAME-record", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: "ANAME",
                     ttl: 3600,
@@ -168,8 +186,8 @@ describe("dnsrecord.validate", function () {
                 });
             }).to.throw("Record missing required field");
         });
-        it("should throw error on missing flags on CAA-record", function () {
-            expect(function () {
+        it("should throw error on missing flags on CAA-record", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: "CAA",
                     ttl: 3600,
@@ -179,8 +197,8 @@ describe("dnsrecord.validate", function () {
                 });
             }).to.throw("Record missing required field");
         });
-        it("should throw error on missing alg on DS-record", function () {
-            expect(function () {
+        it("should throw error on missing alg on DS-record", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: "DS",
                     ttl: 3600,
@@ -191,8 +209,8 @@ describe("dnsrecord.validate", function () {
                 });
             }).to.throw("Record missing required field");
         });
-        it("should throw error on missing priority on MX-record", function () {
-            expect(function () {
+        it("should throw error on missing priority on MX-record", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: "MX",
                     ttl: 3600,
@@ -201,8 +219,8 @@ describe("dnsrecord.validate", function () {
                 });
             }).to.throw("Record missing required field");
         });
-        it("should throw error on missing data on NS-record", function () {
-            expect(function () {
+        it("should throw error on missing data on NS-record", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: "NS",
                     ttl: 3600,
@@ -210,8 +228,8 @@ describe("dnsrecord.validate", function () {
                 });
             }).to.throw("Record missing required field");
         });
-        it("should throw error on missing weight on SRV-record", function () {
-            expect(function () {
+        it("should throw error on missing weight on SRV-record", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: "SRV",
                     ttl: 3600,
@@ -222,8 +240,8 @@ describe("dnsrecord.validate", function () {
                 });
             }).to.throw("Record missing required field");
         });
-        it("should throw error on missing dtype on TLSA-record", function () {
-            expect(function () {
+        it("should throw error on missing dtype on TLSA-record", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: "TLSA",
                     ttl: 3600,
@@ -235,8 +253,8 @@ describe("dnsrecord.validate", function () {
             }).to.throw("Record missing required field");
         });
 
-        it("should throw error on too many fields in object", function () {
-            expect(function () {
+        it("should throw error on too many fields in object", () => {
+            expect(() => {
                 dnsrecord.validate({
                     type: "TLSA",
                     ttl: 3600,

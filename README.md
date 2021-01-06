@@ -12,7 +12,7 @@ npm install domeneshop.js
 
 Use of this module requires Domeneshop API credentials.
 
-You need an API token and secret. See the [Domeneshop API](https://api.domeneshop.no/docs/) documentation for more information (in Norwegian).
+You need an API token and secret. See the [Domeneshop API](https://api.domeneshop.no/docs/) documentation for more information.
 
 **CAUTION:** You should protect these API credentials as you would the password to your Domeneshop user account. Users who can read this information can use these credentials to issue arbitrary API calls on your behalf. 
 
