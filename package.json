@@ -28,7 +28,7 @@
     "@types/node": "^11.15.43",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "mocha": "^6.2.3",
+    "mocha": "^10.2.0",
     "moxios": "^0.4.0",
     "nyc": "^14.1.1",
     "source-map-support": "^0.5.19",
