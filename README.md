@@ -14,7 +14,7 @@ Use of this module requires Domeneshop API credentials.
 
 You need an API token and secret. See the [Domeneshop API](https://api.domeneshop.no/docs/) documentation for more information.
 
-**CAUTION:** You should protect these API credentials as you would the password to your Domeneshop user account. Users who can read this information can use these credentials to issue arbitrary API calls on your behalf. 
+**CAUTION:** You should protect these API credentials as you would the password to your Domeneshop user account. Users who can read this information can use these credentials to issue arbitrary API calls on your behalf. (see [Secure usage example](#secure-usage-example))
 
 ## Usage example 
 
@@ -34,6 +34,48 @@ api.getDomains().then((domains) => {
     console.error(err);
 });
 ```
+
+## Secure usage example
+
+Pre-requirement
+
+```
+npm install dotenv --save
+
+touch .env
+```
+
+.env
+```javascript
+DOMENESHOP_TOKEN=token
+DOMENESHOP_SECRET=secret
+```
+.gitignore
+```
+.env
+```
+
+add dotenv to Usage example along with config loader
+```javascript
+const Domeneshop = require('domeneshop.js');
+const dotenv = require("dotenv")
+
+dotenv.config()
+
+const api = new Domeneshop(process.env.DOMENESHOP_TOKEN,process.env.DOMENESHOP_SECRET);
+
+api.getDomains().then((domains) => {
+    for(let domain of domains) {
+        api.dns.getRecords(domain.id).then((record) => {
+            console.log(domain.domain);
+            console.log(record);
+        });
+    }
+}).catch((err)=>{
+    console.error(err);
+});
+```
+
 
 ## domeneshop.js API
 
