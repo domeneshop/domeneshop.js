@@ -2,7 +2,7 @@
  * Forwarding data
  */
 export interface IForward {
-    host: string;
-    frame?: boolean;
-    url: string;
+  host: string;
+  frame?: boolean;
+  url: string;
 }
