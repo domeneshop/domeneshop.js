@@ -202,7 +202,7 @@ describe("Domeneshop.api", () => {
           request.config.method === "post" &&
           request.config.url === "/test" &&
           request.config.baseURL === instance.apiURL &&
-          request.config.data === "expected data"
+          request.config.data === '"expected data"'
         ) {
           request.respondWith({
             status: 200,
